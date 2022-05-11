@@ -225,7 +225,6 @@ function game(player, computer) {
 
  var round = document.getElementById('round-num');
  round.textContent = 'Round: ' + roundNum;
-
 }
 
 function endgame(winner) {
