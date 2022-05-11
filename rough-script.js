@@ -65,7 +65,6 @@ function game() {
     computer_points = 0;
     round = 0;
 
-
     while (player_points < 3 && computer_points < 3) {
         let playerSelection = prompt("Rock, Paper, or Scissors?");
         playerSelection = playerSelection.toLowerCase();
@@ -94,6 +93,5 @@ function game() {
     if (computer_points == 3) {
         return "Computer won!"
     }
-
 }
 console.log(game());
