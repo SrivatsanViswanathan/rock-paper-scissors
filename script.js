@@ -225,6 +225,14 @@ function game(player, computer) {
 
  var round = document.getElementById('round-num');
  round.textContent = 'Round: ' + roundNum;
+
+  if (playerPoints >= 5 && playerPoints > computerPoints) {
+    endgame('player');
+  }
+
+  else if (computerPoints >= 5 && computerPoints > playerPoints) {
+    endgame('computer');
+  }
 }
 
 function endgame(winner) {
