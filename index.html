@@ -12,8 +12,44 @@
     <title>Rock Paper Scissors</title>
 </head>
     <body>
-        <header class="header" id="header"></header>
-        <article class="body" id="body"></article>
-        <footer class="footer" id="footer"></footer>
+        <header class="header" id="header">
+            <div class="head-container">
+                <h1>Welcome to Rock Paper Scissors</h1>
+            </div>
+        </header>
+								
+        <article class="body" id="body">
+            <div class="round-container">
+               <h1 id="round-num">Round: 0</h1>
+            </div>
+            <div class="score-container">
+                <p id="your-score">Your score: 0</p>
+                <p id="computer-score">Computer's score: 0</p>
+            </div>
+												
+            <div class="button-container">
+                <div class="your-buttons"> 
+                    <img id="rock" src="./images/rock.JPG" alt="Rock">
+                    <img id="paper" src="./images/paper.JPG" alt="Paper">
+                    <img id="scissors" src="./images/scissors.JPG" alt="Scissors">
+                </div>
+                <div class="computer-buttons">
+                    <img id="computer-rock" src="./images/rock.JPG" alt="Rock">
+                    <img id="computer-paper" src="./images/paper.JPG" alt="Paper">
+                    <img id="computer-scissors" src="./images/scissors.JPG" alt="Scissors">
+                </div>
+            </div>
+            <div class="result-container" id="results">
+                <div class="history" id="history"></div>
+                <div class="winner" id="winner"></div>
+            </div>
+        </article>
+
+        <footer class="footer" id="footer">
+            <div class="footer-container">
+                <p>&copy; Srivatsan Viswanathan</p>
+            </div>
+        </footer>
+
     </body>
 </html>
