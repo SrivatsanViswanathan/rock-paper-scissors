@@ -1,6 +1,8 @@
+// Global variables
 var playerPoints= 0;
 var computerPoints = 0;
 var roundNum = 0;
+var addHighlight = false;
 
 const playerRock = document.getElementById('rock');
 const playerPaper = document.getElementById('paper');
@@ -19,6 +21,7 @@ const round = document.getElementById('round-num');
 
 decision();
 
+// Call the game function with computer and player's picks
 function decision() {
     playerRock.addEventListener('click', () => selected('rock'));
     playerPaper.addEventListener('click', () => selected('paper'));
@@ -30,6 +33,7 @@ function decision() {
     }
 }
 
+// Computer picks rock, paper, or scissors randomly
 function computerPlay() {
     var number = Math.random();
     if (number <= 1 / 3) {
@@ -44,42 +48,21 @@ function computerPlay() {
     return hand;
 }
 
+// Checks who wins or loses the round based on player and computer's selection
+// Calls endgame() if someone has won
 function game(player, computer) {
     if (!displayWinner.textContent.includes('Play Again')) {
-        computerRock.classList.remove('after');
-        computerPaper.classList.remove('after');
-        computerScissors.classList.remove('after');
-        playerRock.classList.remove('after');
-        playerPaper.classList.remove('after');
-        playerScissors.classList.remove('after');
-
-        if (computer === 'rock') {
-            computerRock.classList.add('after');
-        }
-        else if (computer === 'paper') {
-            computerPaper.classList.add('after');
-        }
-        else if (computer === 'scissors') {
-            computerScissors.classList.add('after');
-        }
-
-        if (player === 'rock') {
-            playerRock.classList.add('after');
-        }
-        else if (player === 'paper') {
-            playerPaper.classList.add('after');
-        }
-        else if (player === 'scissors') {
-            playerScissors.classList.add('after');
-        }
+        hightlightPick(player, computer, addHighlight);
+        addHighlight = true;
+        hightlightPick(player, computer, addHighlight);
     }
 
     if (playerPoints >= 5 && playerPoints > computerPoints) {
-        endgame('player');
+        endgame('player', player, computer);
     }
 
     else if (computerPoints >= 5 && computerPoints > playerPoints) {
-        endgame('computer');
+        endgame('computer', player, computer);
     }
 
     else if (player == computer) {
@@ -112,15 +95,17 @@ function game(player, computer) {
     round.textContent = 'Round: ' + roundNum;
 
     if (playerPoints >= 5 && playerPoints > computerPoints) {
-        endgame('player');
+        endgame('player', player, computer);
     }
 
     else if (computerPoints >= 5 && computerPoints > playerPoints) {
-        endgame('computer');
+        endgame('computer', player, computer);
     }
+    addHighlight = false;
 }
 
-function endgame(winner) {
+// Shows who won the game and resets game if player hits the 'play again'
+function endgame(winner, player, computer) {
  const playAgain = document.createElement('button');
  playAgain.setAttribute('id', 'play-again');
  playAgain.textContent = "Play Again";
@@ -152,15 +137,45 @@ function endgame(winner) {
   playerPoints = 0;
   computerPoints = 0;
   roundNum = 0;
+  addHighlight = false;
   
-  computerRock.classList.remove('after');
-  computerPaper.classList.remove('after');
-  computerScissors.classList.remove('after');
-  playerRock.classList.remove('after');
-  playerPaper.classList.remove('after');
-  playerScissors.classList.remove('after');
+  hightlightPick(player, computer, addHighlight);
 
   displayWinner.classList.remove('player');
   displayWinner.classList.remove('computer');
  });
+}
+
+//Highlights the player's and computer's pick or removes the highlight
+function hightlightPick(player, computer, addHighlight) {
+    if (addHighlight === true) {
+        if (player === 'rock') {
+            playerRock.classList.add('after');
+        }
+        else if (player === 'paper') {
+            playerPaper.classList.add('after');
+        }
+        else if (player === 'scissors') {
+            playerScissors.classList.add('after');
+        }
+
+        if (computer === 'rock') {
+            computerRock.classList.add('after');
+        }
+        else if (computer === 'paper') {
+            computerPaper.classList.add('after');
+        }
+        else if (computer === 'scissors') {
+            computerScissors.classList.add('after');
+        }
+    }
+    else {
+        playerRock.classList.remove('after');
+        playerPaper.classList.remove('after');
+        playerScissors.classList.remove('after');
+
+        computerRock.classList.remove('after');
+        computerPaper.classList.remove('after');
+        computerScissors.classList.remove('after');
+    }
 }
